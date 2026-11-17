@@ -1,0 +1,2 @@
+FIL base.obj,main.obj,patch.obj,patch_battle_control_window.obj,patch_battle_mode_window.obj,patch_common.obj,patch_cosmos_window.obj,patch_debug_window.obj,patch_fleet_window.obj,patch_hotkeys.obj,patch_mainbtns.obj,patch_nextturn.obj,patch_planet.obj,patch_planet_info_panel.obj,patch_planet_square_window.obj,patch_research.obj,patch_scrollbar.obj,patch_ship_design_window.obj,patch_status_window.obj,registry.obj,utils.obj
+

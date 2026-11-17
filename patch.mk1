@@ -1,0 +1,191 @@
+!define BLANK ""
+D:\VC\ascendancy-extended\base.obj : D:\VC\ascendancy-extended\src\base.asm &
+.AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wasm src\base.asm -fo=.obj -i="C:\WATCOM/h" -mf -3r -d1 -w4 -zq
+
+D:\VC\ascendancy-extended\main.obj : D:\VC\ascendancy-extended\src\main.cpp &
+.AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\main.cpp -fo=.obj -i="C:\WATCOM/h" -i=src -w1 -zq -ad -ox -s -3&
+r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch.obj : D:\VC\ascendancy-extended\src\patches\&
+patch.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch.cpp -fo=.obj -i="C:\WATCOM/h" -i=src -w1 -zq -ad &
+-ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_battle_control_window.obj : D:\VC\ascendancy&
+-extended\src\patches\patch_battle_control_window.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_battle_control_window.cpp -fo=.obj -i="C:\WATCOM/&
+h" -i=src -w1 -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_battle_mode_window.obj : D:\VC\ascendancy-ex&
+tended\src\patches\patch_battle_mode_window.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_battle_mode_window.cpp -fo=.obj -i="C:\WATCOM/h" &
+-i=src -w1 -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_common.obj : D:\VC\ascendancy-extended\src\p&
+atches\patch_common.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_common.cpp -fo=.obj -i="C:\WATCOM/h" -i=src -w1 -&
+zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_cosmos_window.obj : D:\VC\ascendancy-extende&
+d\src\patches\patch_cosmos_window.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_cosmos_window.cpp -fo=.obj -i="C:\WATCOM/h" -i=sr&
+c -w1 -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_debug_window.obj : D:\VC\ascendancy-extended&
+\src\patches\patch_debug_window.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_debug_window.cpp -fo=.obj -i="C:\WATCOM/h" -i=src&
+ -w1 -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_fleet_window.obj : D:\VC\ascendancy-extended&
+\src\patches\patch_fleet_window.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_fleet_window.cpp -fo=.obj -i="C:\WATCOM/h" -i=src&
+ -w1 -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_hotkeys.obj : D:\VC\ascendancy-extended\src\&
+patches\patch_hotkeys.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_hotkeys.cpp -fo=.obj -i="C:\WATCOM/h" -i=src -w1 &
+-zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_mainbtns.obj : D:\VC\ascendancy-extended\src&
+\patches\patch_mainbtns.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_mainbtns.cpp -fo=.obj -i="C:\WATCOM/h" -i=src -w1&
+ -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_nextturn.obj : D:\VC\ascendancy-extended\src&
+\patches\patch_nextturn.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_nextturn.cpp -fo=.obj -i="C:\WATCOM/h" -i=src -w1&
+ -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_planet.obj : D:\VC\ascendancy-extended\src\p&
+atches\patch_planet.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_planet.cpp -fo=.obj -i="C:\WATCOM/h" -i=src -w1 -&
+zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_planet_info_panel.obj : D:\VC\ascendancy-ext&
+ended\src\patches\patch_planet_info_panel.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_planet_info_panel.cpp -fo=.obj -i="C:\WATCOM/h" -&
+i=src -w1 -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_planet_square_window.obj : D:\VC\ascendancy-&
+extended\src\patches\patch_planet_square_window.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_planet_square_window.cpp -fo=.obj -i="C:\WATCOM/h&
+" -i=src -w1 -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_research.obj : D:\VC\ascendancy-extended\src&
+\patches\patch_research.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_research.cpp -fo=.obj -i="C:\WATCOM/h" -i=src -w1&
+ -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_scrollbar.obj : D:\VC\ascendancy-extended\sr&
+c\patches\patch_scrollbar.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_scrollbar.cpp -fo=.obj -i="C:\WATCOM/h" -i=src -w&
+1 -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_ship_design_window.obj : D:\VC\ascendancy-ex&
+tended\src\patches\patch_ship_design_window.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_ship_design_window.cpp -fo=.obj -i="C:\WATCOM/h" &
+-i=src -w1 -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch_status_window.obj : D:\VC\ascendancy-extende&
+d\src\patches\patch_status_window.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\patch_status_window.cpp -fo=.obj -i="C:\WATCOM/h" -i=sr&
+c -w1 -zq -ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\registry.obj : D:\VC\ascendancy-extended\src\patch&
+es\registry.cpp .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\patches\registry.cpp -fo=.obj -i="C:\WATCOM/h" -i=src -w1 -zq -&
+ad -ox -s -3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\utils.obj : D:\VC\ascendancy-extended\src\utils.cp&
+p .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ *wpp386 src\utils.cpp -fo=.obj -i="C:\WATCOM/h" -i=src -w1 -zq -ad -ox -s -&
+3r -bt=dos -mf -xd
+
+D:\VC\ascendancy-extended\patch.exe : D:\VC\ascendancy-extended\base.obj D:\&
+VC\ascendancy-extended\main.obj D:\VC\ascendancy-extended\patch.obj D:\VC\as&
+cendancy-extended\patch_battle_control_window.obj D:\VC\ascendancy-extended\&
+patch_battle_mode_window.obj D:\VC\ascendancy-extended\patch_common.obj D:\V&
+C\ascendancy-extended\patch_cosmos_window.obj D:\VC\ascendancy-extended\patc&
+h_debug_window.obj D:\VC\ascendancy-extended\patch_fleet_window.obj D:\VC\as&
+cendancy-extended\patch_hotkeys.obj D:\VC\ascendancy-extended\patch_mainbtns&
+.obj D:\VC\ascendancy-extended\patch_nextturn.obj D:\VC\ascendancy-extended\&
+patch_planet.obj D:\VC\ascendancy-extended\patch_planet_info_panel.obj D:\VC&
+\ascendancy-extended\patch_planet_square_window.obj D:\VC\ascendancy-extende&
+d\patch_research.obj D:\VC\ascendancy-extended\patch_scrollbar.obj D:\VC\asc&
+endancy-extended\patch_ship_design_window.obj D:\VC\ascendancy-extended\patc&
+h_status_window.obj D:\VC\ascendancy-extended\registry.obj D:\VC\ascendancy-&
+extended\utils.obj D:\VC\ascendancy-extended\src\game\functions.h D:\VC\asce&
+ndancy-extended\src\game\runtime.h D:\VC\ascendancy-extended\src\game\types.&
+h D:\VC\ascendancy-extended\src\game\vars.h D:\VC\ascendancy-extended\src\ma&
+in.h D:\VC\ascendancy-extended\src\patches\patch.h D:\VC\ascendancy-extended&
+\src\patches\patch_battle_control_window.h D:\VC\ascendancy-extended\src\pat&
+ches\patch_battle_mode_window.h D:\VC\ascendancy-extended\src\patches\patch_&
+common.h D:\VC\ascendancy-extended\src\patches\patch_cosmos_window.h D:\VC\a&
+scendancy-extended\src\patches\patch_debug_window.h D:\VC\ascendancy-extende&
+d\src\patches\patch_fleet_window.h D:\VC\ascendancy-extended\src\patches\pat&
+ch_hotkeys.h D:\VC\ascendancy-extended\src\patches\patch_mainbtns.h D:\VC\as&
+cendancy-extended\src\patches\patch_nextturn.h D:\VC\ascendancy-extended\src&
+\patches\patch_planet.h D:\VC\ascendancy-extended\src\patches\patch_planet_i&
+nfo_panel.h D:\VC\ascendancy-extended\src\patches\patch_planet_square_window&
+.h D:\VC\ascendancy-extended\src\patches\patch_research.h D:\VC\ascendancy-e&
+xtended\src\patches\patch_scrollbar.h D:\VC\ascendancy-extended\src\patches\&
+patch_ship_design_window.h D:\VC\ascendancy-extended\src\patches\patch_statu&
+s_window.h D:\VC\ascendancy-extended\src\patches\registry.h D:\VC\ascendancy&
+-extended\src\utils.h D:\VC\ascendancy-extended\src\version.h .AUTODEPEND
+ @D:
+ cd D:\VC\ascendancy-extended
+ call build_increment.cmd
+ @%write patch.lk1 FIL base.obj,main.obj,patch.obj,patch_battle_control_wind&
+ow.obj,patch_battle_mode_window.obj,patch_common.obj,patch_cosmos_window.obj&
+,patch_debug_window.obj,patch_fleet_window.obj,patch_hotkeys.obj,patch_mainb&
+tns.obj,patch_nextturn.obj,patch_planet.obj,patch_planet_info_panel.obj,patc&
+h_planet_square_window.obj,patch_research.obj,patch_scrollbar.obj,patch_ship&
+_design_window.obj,patch_status_window.obj,registry.obj,utils.obj
+ @%append patch.lk1 
+ *wlink name patch sys dos4g @patch.lk2 op m op q op start=start @patch.lk1
+ call lextend.cmd
+
