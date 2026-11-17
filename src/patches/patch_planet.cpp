@@ -8,12 +8,12 @@
 REGISTER_PATCH(PatchPlanet)
 
 // Square outline colors - the same ones the original uses for the grid (switch on color&7)
-static const int OutlineCol[5] = {0x00, 0x0C, 0x75, 0x92, 0xFF};
+// static const int OutlineCol[5] = {0x00, 0x0C, 0x75, 0x92, 0xFF};
 // Haze tint tables for optional variant 1: BLACK04, WHITE00, RED01, GREEN01, BLUE01
-static const int TintHaze[5] = {0x02, 0x0B, 0x08, 0x09, 0x0A};
+// static const int TintHaze[5] = {0x02, 0x0B, 0x08, 0x09, 0x0A};
 static const int TintHaze2[5] = {7, 14, 8, 9, 10};
 // static.txt line indices: 75 "White", 76 "Black", 77 "Red", 79 "Green", 81 "Blue"
-static const int ColorText[5] = {76, 75, 77, 79, 81};
+// static const int ColorText[5] = {76, 75, 77, 79, 81};
 
 static void DrawEdges(PANE* pPane, SCRNVERTEX* vlist, unsigned char color)
 {
@@ -54,6 +54,7 @@ static POINT GetPlanetSquareHotPoint(P_Planet pPlanet, int squareIndex)
     return result;
 }
 
+/*
 static void SetFullDiamond(SCRNVERTEX* full, int topX, int topY)
 {
     full[0].x = topX;
@@ -65,7 +66,9 @@ static void SetFullDiamond(SCRNVERTEX* full, int topX, int topY)
     full[2].y = full[0].y + 34;
     full[3].y = full[0].y + 17;
 }
+*/
 
+/*
 static void SetInsetDiamond(SCRNVERTEX* full, SCRNVERTEX* inset, bool buildable)
 {
     int dx, dy;
@@ -88,6 +91,7 @@ static void SetInsetDiamond(SCRNVERTEX* full, SCRNVERTEX* inset, bool buildable)
     inset[3].x = full[3].x + dx;
     inset[3].y = full[3].y;
 }
+*/
 
 static int AnyBuildable(P_Planet pPlanet, UWORD sq)
 {
@@ -162,6 +166,7 @@ static int Patch_WndPlanet_Proc3(P_Wnd07PW pWnd, UWORD message, int param1, int 
             }
             break;
         case ASCEND_WM_LEFTCLICK:
+        {
             int r = Wnd07PW_Procs.proc3_msg((P_WndA2)pWnd, message, param1, param2);
             P_Planet pPlanet = Game.pCurPlanet;
             UWORD sq;
@@ -180,7 +185,7 @@ static int Patch_WndPlanet_Proc3(P_Wnd07PW pWnd, UWORD message, int param1, int 
                 }
             }
             return r;
-            break;
+        }
     }
     return Wnd07PW_Procs.proc3_msg((P_WndA2)pWnd, message, param1, param2);
 }

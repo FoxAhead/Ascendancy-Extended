@@ -27,6 +27,7 @@ static void Patch_MainAfterLoadAscendCfg(P_WinMgr pWinMgr)
     Registry::CallHook(1);
 }
 
+/*
 static void __cdecl PrintDebugInfoOnStart(const char* title)
 {
     printf(title);
@@ -35,6 +36,7 @@ static void __cdecl PrintDebugInfoOnStart(const char* title)
     printf("cseg03: %X\n", cseg03_start);
     printf("dseg04: %X\n", dseg04_start);
 }
+*/
 
 void PatchInitRtns(unsigned int limit)
 {

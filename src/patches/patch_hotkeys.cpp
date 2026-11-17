@@ -206,7 +206,6 @@ void HotkeyBroadcastHook(P_WinMgr pWinMgr, UWORD message, int ascii, int scancod
         {
             case KSC_F1:
             {
-                char topic[10];
                 P_Wnd20HW pHelpWnd = (P_Wnd20HW)WinMgr_FindWnd(pWinMgr, "HELPWINDOW", 0);
                 if (pHelpWnd && HelpGuide[pWinMgr->currentState])
                 {

@@ -29,7 +29,6 @@ static int Patch_Wnd02COSW_Proc3(P_Wnd02COSW pWnd, UWORD message, int param1, in
                     }
                     break;
             }
-            return Wnd02COSW_Procs.proc3_msg((P_WndA2)pWnd, message, param1, param2);
             break;
 
         case ASCEND_WM_RIGHTCLICK:

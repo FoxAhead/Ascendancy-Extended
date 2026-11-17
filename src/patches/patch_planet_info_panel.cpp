@@ -66,6 +66,7 @@ static void DrawPopulationIcons(PANE* pane, int maxPop, int usedPop, int current
     }
 }
 
+/*
 // Draws a 3-pixel border around the pane.
 static void DrawPaneBorder(PANE* pane, UBYTE color)
 {
@@ -77,6 +78,7 @@ static void DrawPaneBorder(PANE* pane, UBYTE color)
         Pane_CopyOrDrawRectangle(pane, i, i, width - i, height - i, color, 0);
     }
 }
+*/
 
 // Determines if the window is active (under the cursor or forced) and not overlapped
 // by auxiliary windows PLANLIST / PLSQUARE.

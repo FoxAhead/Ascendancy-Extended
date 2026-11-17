@@ -14,7 +14,6 @@ void Patch_BuildWListBox(P_Wnd13DBGWND pDbgWnd, P_Wnd10LB pListBox)
     WORD windowCount;
     int hwnd;        
     T_WndA2* pWndA2; 
-    char v8;         
     char s[72];      
     char sc[20];      
 

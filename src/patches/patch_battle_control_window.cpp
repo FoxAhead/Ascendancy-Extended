@@ -63,10 +63,9 @@ static void Patch_BatControlWndDrawListItemFuncOrbital(PANE* pPane, P_Square pSq
     int left = (int)(pSquare->flags >> 8);
     int rng = 0, dmg = 0, use = 0;
     Planet_GetOrbitalWeaponStats(NULL, pSquare->planetItemIndex, &rng, &dmg, &use);
-    char s1[20], s2[20];
+    char s1[20];
     sprintf(s1, "dmg %d\nrng %d\nuse %d/%d", dmg, rng, left, use);
     Font_DrawFormattedText(&WinMgr.SmallFont, 2, 31, s1, 0x0, 0x3C, 0xFF, 122);
-    // Font_DrawFormattedText(&WinMgr.SmallFont, 135, 31, s2, ASCEND_TF_HALIGN_RIGHT_X, 0x3C, 0xFF, 122);
 }
 
 void PatchBattleControlWindow::Hook(int stage)

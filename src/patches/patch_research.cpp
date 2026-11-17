@@ -7,8 +7,6 @@
 
 REGISTER_PATCH(PatchResearch)
 
-static int prevEnterTick = 0;
-
 static int Patch_WndResearch_Proc3(P_Wnd09RW pWnd, UWORD message, int param1, int param2)
 {
     switch (message)
