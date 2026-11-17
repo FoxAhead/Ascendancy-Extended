@@ -1,4 +1,4 @@
-[![ru](https://shields.io)](README.ru.md)
+![ru](README.ru.md)
 
 # Ascendancy Extended
 An unofficial patch for the game Ascendancy (DOS, 1995) by The Logic Factory.
