@@ -1,5 +1,7 @@
 ![ru](README.ru.md)
 
+![Screenshot](Screenshots/OPENING.GIF "Screenshot")
+
 # Ascendancy Extended
 An unofficial patch for the game Ascendancy (DOS, 1995) by The Logic Factory.
 
