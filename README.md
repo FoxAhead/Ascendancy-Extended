@@ -1,6 +1,6 @@
 ![OPENING](Screenshots/OPENING.GIF)
 
-![ru](README.ru.md)
+[ru](README.ru.md)
 
 # Ascendancy Extended
 An unofficial patch for the game Ascendancy (DOS, 1995) by The Logic Factory.
@@ -64,11 +64,12 @@ Place `ANTAGX.EXE` into your game directory and run it instead of `ANTAG.EXE` (i
 - Color-coded highlighting for structures matching the color of the tile they are built on, plus an automation marker. Toggleable with the `C` key.
 - Hover tooltip for structures (Name, tile color, automation status). Holding **Shift** while hovering shows additional details about the resources generated.
 - Clicking an empty tile immediately opens the build list, bypassing the intermediate window with the `Build` button.
-- The build list displays extended structure info: cost, resource output, and build time (as well as weapon stats for orbital weapons).
+- The build list displays extended structure info: cost, resource output, and build time (as well as weapon stats for orbital weapons).  
   ![PLANET3](Screenshots/PLANET3.GIF)
 - The top Research / Industry / Prosperity info panels display the current output points for each resource. The Prosperity panel also shows the days remaining until population growth.
 - Clicking these info panels opens a detailed calculation breakdown (structure contributions, x1.5 special structure bonuses, special projects, power normalization, and population upkeep).  
   ![PLANET2](Screenshots/PLANET2.GIF)
+- Completed one-time projects appear on the top panel. In the build list, they are also marked and grayed out.
 
 ### Research Screen
 ![RESEARCH](Screenshots/RESEARCH.GIF)

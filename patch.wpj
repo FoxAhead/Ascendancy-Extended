@@ -12,11 +12,11 @@ WRect
 MProject
 3
 MCommand
-0
+19
+build_increment.cmd
 4
 MCommand
-9
-clean.bat
+0
 1
 5
 WFileName

@@ -38,6 +38,7 @@ static const HelpItem Screen0[] = {
 static const HelpItem Screen1[] = {
     {"Enter", "Advance one day"},
     {"F2, F3, F4, F5, F6", "Planets, Ships, Research, Ability, Species"},
+    {"N or hold Shift", "Display star names"},
     {"Left click", "Star - go to system"},
     {"Right click", "Star - select, Ship - open contents"},
     {"- / =", "Decrease / increase rotation speed"},
@@ -54,6 +55,13 @@ static const HelpItem Screen1[] = {
 // PLANET_STATUS
 static const HelpItem Screen10[] = {
     {"PgUp/PgDn/Home/End", "Scroll planets list"},
+    {NULL, NULL},
+};
+
+// BATTLE
+static const HelpItem Screen16[] = {
+    {"Space or Enter", "Skip animation"},
+    {"- / =", "Decrease / increase rotation speed"},
     {NULL, NULL},
 };
 
@@ -113,15 +121,16 @@ static const HelpItem* const HelpGuide[21] = {
     NULL,      // 13 DIPLOMACY
     NULL,      // 14 INTEL
     NULL,      // 15 TUTORIAL
-    NULL,      // 16 BATTLE
+    Screen16,  // 16 BATTLE
     Screen17,  // 17 PLANET_ALLOC
     Screen18,  // 18 FLEET_VIEW
     NULL,      // 19
     Screen20,  // 20 RESEARCH
 };
 
-static void FillTextItem(P_HelpItem it, char* text, P_Font pFont, int x, int y, int flags)
+static void AddTextItem(P_Wnd20HW pHelpWnd, char* text, P_Font pFont, int x, int y, int flags)
 {
+    P_HelpItem it = &pHelpWnd->helpItems[pHelpWnd->helpItemsNum++];
     it->type = 1;
     it->pText = text;
     it->pFont = pFont;
@@ -134,6 +143,7 @@ static void FillTextItem(P_HelpItem it, char* text, P_Font pFont, int x, int y, 
 
 void ShowHotkeyHelpMem(P_WinMgr pWinMgr, P_Wnd20HW pHelpWnd, int st)
 {
+    pHelpWnd->helpItemsNum = 0;
     pHelpWnd->pagesNum = 0;
     pHelpWnd->page = 0;
     sprintf(pHelpWnd->helpTopic, "hotkey%02d", st);
@@ -153,20 +163,23 @@ void ShowHotkeyHelpMem(P_WinMgr pWinMgr, P_Wnd20HW pHelpWnd, int st)
     pHelpWnd->super.shapeCacheIndex = GwshareShpCacheIndexes[0x25];
     pHelpWnd->super.frameShapeNumber = 0;
 
-    FillTextItem(&pHelpWnd->helpItems[0], st ? "Hotkeys" : "Global Hotkeys", &WinMgr.LargeFont, 0, 15, 2);
+    AddTextItem(pHelpWnd, st ? "Hotkeys" : "Global Hotkeys", &WinMgr.LargeFont, 0, 15, 2);
 
     char s1[512], s2[512];
-
+    int y1 = 0;
+    bool hasDebugInfo = false;
     char* p1 = s1;
     char* p2 = s2;
     for (i = 0; HelpGuide[st][i].key != NULL; ++i)
     {
         if (HelpGuide[st][i].key == DEBUG)
         {
+            hasDebugInfo = true;
+            y1 = 35 + GetMultiLineTextHeight(&WinMgr.SmallFont, s1);
             if (CheatMode == TRUE)
             {
-                p1 = stpcpy(p1, "\n");
-                p2 = stpcpy(p2, "\n");
+                p1 = stpcpy(p1, "\n\n");
+                p2 = stpcpy(p2, "\n\n");
                 continue;
             }
             else
@@ -177,17 +190,36 @@ void ShowHotkeyHelpMem(P_WinMgr pWinMgr, P_Wnd20HW pHelpWnd, int st)
         p1 += sprintf(p1, i == 0 ? "%s" : "\n%s", HelpGuide[st][i].key);
         p2 += sprintf(p2, i == 0 ? "%s" : "\n%s", HelpGuide[st][i].desc);
     }
+    if (!y1)
+    {
+        y1 = 35 + GetMultiLineTextHeight(&WinMgr.SmallFont, s1);
+    }
     int w1 = GetMultiLineTextWidth(&WinMgr.SmallFont, s1);
     int w2 = GetMultiLineTextWidth(&WinMgr.SmallFont, s2);
     int x1 = (325 - (w1 + 10 + w2)) / 2;
 
     char* p = pHelpWnd->buffer;
     p1 = stpcpy(p, s1);
-    FillTextItem(&pHelpWnd->helpItems[1], p, &WinMgr.SmallFont, x1, 35, 0);
-    p = strcpy(++p1, s2);
-    FillTextItem(&pHelpWnd->helpItems[2], p, &WinMgr.SmallFont, x1 + w1 + 10, 35, 0);
+    AddTextItem(pHelpWnd, p, &WinMgr.SmallFont, x1, 35, 0);
+    p = p1 + 1;
+    p1 = stpcpy(p, s2);
+    AddTextItem(pHelpWnd, p, &WinMgr.SmallFont, x1 + w1 + 10, 35, 0);
 
-    pHelpWnd->helpItemsNum = 3;
+    if (hasDebugInfo)
+    {
+        if (CheatMode)
+        {
+            p = p1 + 1;
+            p1 = stpcpy(p, "File NOUGAT.LF found, cheats/debug enabled:");
+            AddTextItem(pHelpWnd, p, &WinMgr.SmallFont, 0, y1 + 10, 2);
+        }
+        else if (st == 0)
+        {
+            p = p1 + 1;
+            p1 = stpcpy(p, "Create empty file NOUGAT.LF for cheats/debug");
+            AddTextItem(pHelpWnd, p, &WinMgr.SmallFont, 0, y1 + 10, 2);
+        }
+    }
 
     P_WndA2 btn = (*pHelpWnd->super.children)[0];
     strcpy(btn->name, "OK");

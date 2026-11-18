@@ -18,8 +18,7 @@ dr2en
 1
 4
 MCommand
-24
-call build_increment.cmd
+0
 5
 MCommand
 16

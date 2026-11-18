@@ -9,6 +9,8 @@ REGISTER_PATCH(PatchCosmosWindow)
 
 static int g_shiftCache = 0;
 
+static bool g_showNames = false;
+
 static int Patch_Wnd02COSW_Proc3(P_Wnd02COSW pWnd, UWORD message, int param1, int param2)
 {
     switch (message)
@@ -47,6 +49,10 @@ static int Patch_Wnd02COSW_Proc3(P_Wnd02COSW pWnd, UWORD message, int param1, in
                         return 0;
                     }
                     break;
+                case KSC_N:
+                    g_showNames = !g_showNames;
+                    pWnd->super.pProcs->proc4_draw((P_WndA2)pWnd, 0);
+                    return 0;
             }
             break;
 
@@ -107,7 +113,7 @@ static void Patch_Wnd02COSW_Proc4(P_Wnd02COSW pWnd, int a2)
             y += 13;
         }
     }
-    if (Keyboard.Shift)
+    if (WinMgr.currentState != ASCEND_WINMGR_STATE_NEW_GAME && (Keyboard.Shift || g_showNames))
     {
         WinMgr.SmallFont.pane = pWnd->super.pane;
 
@@ -139,7 +145,7 @@ static void Patch_Wnd02COSW_Proc4(P_Wnd02COSW pWnd, int a2)
                     {
                         shade = 0;
                     }
-                    Font_DrawFormattedText(&WinMgr.SmallFont, pItem->x, pItem->y - 5, pStar->name, ASCEND_TF_HALIGN_CENTER_X | ASCEND_TF_VALIGN_BOTTOM_Y, 3 + shade * 4, 0xFF, 0);
+                    Font_DrawFormattedText(&WinMgr.SmallFont, pItem->x, pItem->y - 4, pStar->name, ASCEND_TF_HALIGN_CENTER_X | ASCEND_TF_VALIGN_BOTTOM_Y, 3 + shade * 4, 0xFF, 0);
                 }
             }
         }
