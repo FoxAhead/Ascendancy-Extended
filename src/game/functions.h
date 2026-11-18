@@ -431,6 +431,7 @@ extern void Wnd01FLIC_Dtor(P_Wnd01FLIC self, unsigned int a2);
 extern UBYTE * Wnd01FLIC_LoadFlicHeader(P_Wnd01FLIC a1, const char * flicName);
 extern unsigned int Wnd01FLIC_Play(P_Wnd01FLIC pWnd);
 extern int Wnd01FLIC_Proc3(P_Wnd01FLIC pWnd, UWORD message, int param1, int param2);
+extern void Wnd02COSWItems_Draw(T_Wnd02COSWItems * pItems, P_Wnd02COSW pWnd);
 extern void Wnd02COSW_Ctor(P_Wnd02COSW pWnd);
 extern void Wnd02COSW_Dtor(P_Wnd02COSW self, unsigned int a2);
 extern void Wnd02COSW_HandleClickItem(P_Wnd02COSW pWnd);

@@ -734,23 +734,23 @@ struct T_Camera
 };
 
 /* 352 */
-struct T_Wnd02COSWt1
+struct T_Wnd02COSWItems
 {
-  int Unknown_0[256];
-  int num;
+  P_CWDisplayItem pItems[256];
+  int count;
 };
 
 /* 238 */
 struct T_Wnd02COSW
 {
   T_WndA2 super;
-  void *Unknown_AB;
+  void *shapeTable;
   void *Unknown_AF;
   P_CWDisplayItem pDisplayItems;
   UWORD displayItemsCount;
   UWORD displayItemsCapacity;
   P_CWDisplayItem pHoveredDisplayItem;
-  char backgroundColor;
+  UBYTE backgroundColor;
   int Unknown_C0;
   int Unknown_C4;
   int Unknown_C8;
@@ -760,7 +760,7 @@ struct T_Wnd02COSW
   UBYTE Unknown_D8;
   char Unknown_D9;
   T_Camera camera;
-  T_Wnd02COSWt1 Unknown_172;
+  T_Wnd02COSWItems items;
   UWORD _viewportWidth;
   UWORD _viewportHeight;
   float _fov;
@@ -802,7 +802,8 @@ struct T_CWDisplayItem
   WORD y;
   WORD x2;
   WORD y2;
-  __int16 Unknown_9[4];
+  float depth;
+  int Unknown_11;
 };
 
 /* 272 */
@@ -842,7 +843,7 @@ struct T_Planet
   UWORD buildingProgress;
   UWORD buildingSquareIndex;
   UBYTE buildingPlanetItemIndex;
-  UWORD maximumPopulation2;
+  UWORD basePopulation;
   UBYTE raceIndex;
   BYTE attackingItemsCount;
   BYTE defensiveItemsCount;

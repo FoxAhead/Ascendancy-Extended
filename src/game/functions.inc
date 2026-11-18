@@ -139,6 +139,7 @@ make_label 00024198h, Wnd02COSW_Zoom_
 make_label 00024948h, Wnd02COSW_UpdateHovered_
 make_label 00024BE0h, Wnd02COSW_HandleClickItem_
 make_label 00024FCCh, Wnd02COSW_Proc6_
+make_label 000254F8h, Wnd02COSWItems_Draw_
 make_label 00025BF8h, Wnd05RW_Ctor_
 make_label 00025C08h, Wnd05RW_Dtor_
 make_label 00025C4Ch, Wnd05RW_Proc4_

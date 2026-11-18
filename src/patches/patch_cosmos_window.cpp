@@ -7,10 +7,29 @@
 
 REGISTER_PATCH(PatchCosmosWindow)
 
+static int g_shiftCache = 0;
+
 static int Patch_Wnd02COSW_Proc3(P_Wnd02COSW pWnd, UWORD message, int param1, int param2)
 {
     switch (message)
     {
+        case ASCEND_WM_ACTIVATE:
+            WinMgr_AddRepeatingEvent(&WinMgr, pWnd->super.hwnd, 0x199, 0, 0, 2);
+            break;
+        case ASCEND_WM_DEACTIVATE:
+            WinMgr_RemoveRepeatingEvent(&WinMgr, pWnd->super.hwnd, 0x199);
+            break;
+        case 0x199:
+            if (g_shiftCache != Keyboard.Shift)
+            {
+                g_shiftCache = Keyboard.Shift;
+                if (pWnd->super.shown)
+                {
+                    pWnd->super.pProcs->proc4_draw(&pWnd->super, 0);
+                }
+            }
+            return TRUE;
+
         case ASCEND_WM_KEYBOARD:
             switch (param2)
             {
@@ -86,6 +105,43 @@ static void Patch_Wnd02COSW_Proc4(P_Wnd02COSW pWnd, int a2)
                 Font_DrawFormattedText(&WinMgr.LargeFont, 137, y, s, 0, color, 0xFF, 0);
             }
             y += 13;
+        }
+    }
+    if (Keyboard.Shift)
+    {
+        WinMgr.SmallFont.pane = pWnd->super.pane;
+
+        for (int i = 0; i < pWnd->items.count; ++i)
+        {
+            P_CWDisplayItem pItem = pWnd->items.pItems[i];
+            if (pItem->targetType == 0)
+            {
+                P_Star pStar = pItem->pObject.pStar;
+                if (PlayerRaceMask & pStar->exploredBits)
+                {
+                    int relativeDepth = (int)(pItem->depth + -1500.0);
+                    int shade = 3;
+                    if (relativeDepth <= 220)
+                    {
+                        if (relativeDepth <= 0)
+                        {
+                            if (relativeDepth > -220)
+                            {
+                                shade = 2;
+                            }
+                        }
+                        else
+                        {
+                            shade = 1;
+                        }
+                    }
+                    else
+                    {
+                        shade = 0;
+                    }
+                    Font_DrawFormattedText(&WinMgr.SmallFont, pItem->x, pItem->y - 5, pStar->name, ASCEND_TF_HALIGN_CENTER_X | ASCEND_TF_VALIGN_BOTTOM_Y, 3 + shade * 4, 0xFF, 0);
+                }
+            }
         }
     }
 }
