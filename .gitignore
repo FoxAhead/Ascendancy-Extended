@@ -41,3 +41,7 @@ log.txt
 *.err
 *.map
 *.lst
+*.lnk
+*.lk1
+*.mk
+*.mk1

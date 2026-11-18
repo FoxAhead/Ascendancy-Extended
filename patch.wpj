@@ -5,7 +5,7 @@ VpeMain
 1
 WRect
 0
-9
+0
 7680
 9216
 2
@@ -15,7 +15,8 @@ MCommand
 0
 4
 MCommand
-0
+9
+clean.bat
 1
 5
 WFileName
@@ -31,13 +32,13 @@ WRect
 0
 0
 5632
-4359
+4339
 0
 0
 9
 WFileName
 9
 patch.tgt
-0
-15
+13
+28
 7
