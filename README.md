@@ -39,8 +39,10 @@ Place `ANTAGX.EXE` into your game directory and run it instead of `ANTAG.EXE` (i
 - **F2–F6** duplicate the `Planets / Ships / Research / Special Ability / Species` buttons on the main screen.
 - **Enter** advances to the next day (triggers the `NEXTTURN` button).
 - Buttons on the right-hand panel display live status info: colony and ship counts, days remaining until research completion, special ability readiness, and `!` warning indicators (idle planets with no build project / no active research project).
+- Star names are displayed (when holding Shift or toggled with the N key).
 - Right-clicking a star only shifts focus (moves the white selection ring) without entering the star system (matching the Diplomacy screen behavior).
 - Hovering the mouse cursor over a ship now displays its name and current status.
+- Left-clicking on a ship moves the view to its location.
 - Right-clicking a ship immediately opens the Ship screen (ship interior/loadout).
 
 ### Planets List

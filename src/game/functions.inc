@@ -126,7 +126,7 @@ make_label 000223B0h, Sector_Ctor_
 make_label 000223D0h, Type09_Dtor_
 make_label 000223E0h, Type09_Ctor_
 make_label 00022400h, Planet_Ctor_
-make_label 00022430h, Compare_
+make_label 00022430h, CompareCOSWItems_
 make_label 00022468h, OnLeaveStateResetNextTurnButton_
 make_label 000224A4h, Wnd02COSW_Ctor_
 make_label 00022588h, Wnd02COSW_Dtor_
@@ -136,9 +136,11 @@ make_label 000228A4h, Wnd02COSW_Proc3_
 make_label 00023BF0h, Wnd02COSW_Proc4_
 make_label 00024154h, Wnd02COSW_Rotate_
 make_label 00024198h, Wnd02COSW_Zoom_
+make_label 0002422Ch, Wnd02COSW_ProjectItems_
 make_label 00024948h, Wnd02COSW_UpdateHovered_
 make_label 00024BE0h, Wnd02COSW_HandleClickItem_
 make_label 00024FCCh, Wnd02COSW_Proc6_
+make_label 000254DCh, Wnd02COSWItems_Sort_
 make_label 000254F8h, Wnd02COSWItems_Draw_
 make_label 00025BF8h, Wnd05RW_Ctor_
 make_label 00025C08h, Wnd05RW_Dtor_

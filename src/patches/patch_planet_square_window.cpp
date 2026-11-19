@@ -184,6 +184,7 @@ static void Patch_Wnd14PSW_Proc4(P_Wnd14PSW pWnd, int a2)
 {
     int savedBackColor = WinMgr.LargeFont.backColor;
     Wnd14PSW_Procs.proc4_draw((P_WndA2)pWnd, a2);
+    // BUG? at Q_Wnd14PSW_Proc4_sub_3A6BC: WinMgr.LargeFont.backColor = 0xFF;
     WinMgr.LargeFont.backColor = savedBackColor;
     WinMgr.LargeFont.pane = pWnd->super.pane;
     WinMgr.SmallFont.pane = pWnd->super.pane;
