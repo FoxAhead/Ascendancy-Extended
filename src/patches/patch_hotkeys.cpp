@@ -39,7 +39,7 @@ static const HelpItem Screen1[] = {
     {"Enter", "Advance one day"},
     {"F2, F3, F4, F5, F6", "Planets, Ships, Research, Ability, Species"},
     {"N or hold Shift", "Display star names"},
-    {"Left click", "Star - go to system"},
+    {"Left click", "Star - go to system, Ship - go to ship"},
     {"Right click", "Star - select, Ship - open contents"},
     {"- / =", "Decrease / increase rotation speed"},
     {DEBUG, DEBUG},

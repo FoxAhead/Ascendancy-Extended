@@ -56,6 +56,7 @@ static int Patch_Wnd02COSW_Proc3(P_Wnd02COSW pWnd, UWORD message, int param1, in
             }
             break;
 
+        case ASCEND_WM_LEFTCLICK:
         case ASCEND_WM_RIGHTCLICK:
             if (WinMgr.currentState == ASCEND_WINMGR_STATE_MAIN_SCREEN)
             {
@@ -64,29 +65,49 @@ static int Patch_Wnd02COSW_Proc3(P_Wnd02COSW pWnd, UWORD message, int param1, in
                     switch (pWnd->pHoveredDisplayItem->targetType)
                     {
                         case ASCEND_TARGET_TYPE_0_STAR:
-                        {
-                            P_Star pClickedStar = pWnd->pHoveredDisplayItem->pObject.pStar;
-                            if ((PlayerRaceMask & pClickedStar->exploredBits) != 0)
+                            if (message == ASCEND_WM_RIGHTCLICK)
                             {
-                                Game.pCurStar = pClickedStar;
-                                pWnd->super.pProcs->proc4_draw((P_WndA2)pWnd, 0);
+                                P_Star pClickedStar = pWnd->pHoveredDisplayItem->pObject.pStar;
+                                if ((PlayerRaceMask & pClickedStar->exploredBits) != 0)
+                                {
+                                    Game.pCurStar = pClickedStar;
+                                    pWnd->super.pProcs->proc4_draw((P_WndA2)pWnd, 0);
+                                }
+                                return 0;
                             }
                             break;
-                        }
                         case ASCEND_TARGET_TYPE_2_SHIP:
                         {
                             P_Ship pClickedShip = pWnd->pHoveredDisplayItem->pObject.pShip;
                             if (pClickedShip->raceIndex == PlayerRaceIndex)
                             {
-                                P_Wnd08SW pWnd08SW = (P_Wnd08SW)WinMgr_FindWnd(&WinMgr, "SHIPDESSCREEN", 0);
-                                Wnd08SW_Open(pWnd08SW, pClickedShip, 0, TRUE);
-                                WinMgr_QueueMessage(&WinMgr, ASCEND_SM_SWITCHSTATE, ASCEND_WINMGR_STATE_SHIP_DESIGN, 1);
-                                break;
+                                if (message == ASCEND_WM_LEFTCLICK)
+                                {
+                                    switch (pClickedShip->locationType)
+                                    {
+                                        case ASCEND_LOCATION_TYPE_SHIPYARD:
+                                        case ASCEND_LOCATION_TYPE_SHIPDOCK:
+                                        case ASCEND_LOCATION_TYPE_ORBIT:
+                                            Game.pCurPlanet = pClickedShip->pLocation.pPlanet;
+                                            WinMgr_QueueMessage(&WinMgr, ASCEND_SM_SWITCHSTATE, ASCEND_WINMGR_STATE_PLANET_ALLOC, 1);
+                                            break;
+                                        case ASCEND_LOCATION_TYPE_SYSTEM:
+                                            Game.pCurStar = pClickedShip->pLocation.pStar;
+                                            WinMgr_QueueMessage(&WinMgr, ASCEND_SM_SWITCHSTATE, ASCEND_WINMGR_STATE_BATTLE, 1);
+                                            break;
+                                    }
+                                }
+                                else
+                                {
+                                    P_Wnd08SW pWnd08SW = (P_Wnd08SW)WinMgr_FindWnd(&WinMgr, "SHIPDESSCREEN", 0);
+                                    Wnd08SW_Open(pWnd08SW, pClickedShip, 0, TRUE);
+                                    WinMgr_QueueMessage(&WinMgr, ASCEND_SM_SWITCHSTATE, ASCEND_WINMGR_STATE_SHIP_DESIGN, 1);
+                                }
                             }
+                            return 0;
                         }
                     }
                 }
-                return TRUE;
             }
             break;
     }
@@ -97,6 +118,7 @@ static int Patch_Wnd02COSW_Proc3(P_Wnd02COSW pWnd, UWORD message, int param1, in
 static void Patch_Wnd02COSW_Proc4(P_Wnd02COSW pWnd, int a2)
 {
     Wnd02COSW_Procs.proc4_draw((P_WndA2)pWnd, a2);
+    // Draw additional attitudes toward player
     if (CheatMode == TRUE && pWnd->showGalaxyDebugInfo == TRUE)
     {
         char s[10];
@@ -113,6 +135,7 @@ static void Patch_Wnd02COSW_Proc4(P_Wnd02COSW pWnd, int a2)
             y += 13;
         }
     }
+    // Draw star names
     if (WinMgr.currentState != ASCEND_WINMGR_STATE_NEW_GAME && (Keyboard.Shift || g_showNames))
     {
         WinMgr.SmallFont.pane = pWnd->super.pane;
@@ -120,7 +143,7 @@ static void Patch_Wnd02COSW_Proc4(P_Wnd02COSW pWnd, int a2)
         for (int i = 0; i < pWnd->items.count; ++i)
         {
             P_CWDisplayItem pItem = pWnd->items.pItems[i];
-            if (pItem->targetType == 0)
+            if (pItem->targetType == ASCEND_CWIT_STAR)
             {
                 P_Star pStar = pItem->pObject.pStar;
                 if (PlayerRaceMask & pStar->exploredBits)
@@ -155,7 +178,7 @@ static void Patch_Wnd02COSW_Proc4(P_Wnd02COSW pWnd, int a2)
 void __cdecl Patch_UpdateHover(P_Wnd02COSW pWnd)
 {
     char s[100];
-    if (pWnd->pHoveredDisplayItem->targetType == ASCEND_TARGET_TYPE_2_SHIP)
+    if (pWnd->pHoveredDisplayItem->targetType == ASCEND_CWIT_SHIP)
     {
         P_Ship pShip = pWnd->pHoveredDisplayItem->pObject.pShip;
         if (pShip->raceIndex == PlayerRaceIndex)
@@ -205,8 +228,9 @@ void __cdecl Patch_UpdateHover(P_Wnd02COSW pWnd)
                     break;
             }
 
-            int y = pWnd->super.pane.y1 - 27;
+            int y = pWnd->super.pane.y1 - 35;
             int x = pWnd->super.pane.x1 - 130;
+            WinMgr.SmallFont.pane = pWnd->super.pane;
             Font_DrawFormattedText(&WinMgr.SmallFont, x, y, s, ASCEND_TF_HALIGN_CENTER_X, 0xFFFF, 0xFF, 0);
         }
     }
@@ -236,6 +260,7 @@ void PatchCosmosWindow::Hook(int stage)
         case 0:
             WriteMemory(0x00024AC3 + 2, Patch_UpdateHover_, false);
             WriteMemory(0x000249E5 + 1, NULL, false, 0xFF);
+            WriteMemory(0x000249F7 + 2, NULL, false, 35);
             break;
 
         case 1:

@@ -744,18 +744,18 @@ struct T_Wnd02COSWItems
 struct T_Wnd02COSW
 {
   T_WndA2 super;
-  void *shapeTable;
-  void *Unknown_AF;
-  P_CWDisplayItem pDisplayItems;
+  void *starShapes;
+  void *shipShapes;
+  P_CWDisplayItem pDisplayItem;
   UWORD displayItemsCount;
   UWORD displayItemsCapacity;
   P_CWDisplayItem pHoveredDisplayItem;
   UBYTE backgroundColor;
-  int Unknown_C0;
-  int Unknown_C4;
-  int Unknown_C8;
-  int Unknown_CC;
-  int Unknown_D0;
+  int _actions;
+  int showLanes;
+  int showShips;
+  int showColonies;
+  int showRaceFlags;
   BOOL isStateRaceSelect;
   UBYTE Unknown_D8;
   char Unknown_D9;
@@ -767,7 +767,7 @@ struct T_Wnd02COSW
   int cursorShape;
   int Unknown_582;
   int Unknown_586;
-  int Unknown_58A;
+  int empireMode;
   int showGalaxyDebugInfo;
   int Unknown_592;
 };
@@ -3011,6 +3011,14 @@ enum MACRO_ASCEND_SHIP_DESIGN_MODE
 {
   ASCEND_SDM_NEW = 0x0,
   ASCEND_SDM_REFIT = 0xFFFFFFFF,
+};
+
+/* 402 */
+enum MACRO_ASCEND_COSW_ITEM_TYPE
+{
+  ASCEND_CWIT_STAR = 0x0,
+  ASCEND_CWIT_LANE = 0x1,
+  ASCEND_CWIT_SHIP = 0x2,
 };
 
 #pragma pack( __pop )
