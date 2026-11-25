@@ -74,6 +74,7 @@ static const HelpItem Screen17[] = {
     {"M", "Toggle self-managed"},
     {"Hold Shift", "Additional info"},
     {"PgUp/PgDn/Home/End", "Scroll items list"},
+    {"Left/Right", "Cycle through your planets"},
     {DEBUG, DEBUG},
     {"R", "Take over planet"},
     {"T", "Create Colony Base"},

@@ -63,6 +63,7 @@ Place `ANTAGX.EXE` into your game directory and run it instead of `ANTAG.EXE` (i
 ### Planet Screen
 ![PLANET1](Screenshots/PLANET1.GIF)
 - Displays the planet's name and its self-managed status (`M` button).
+- Left/Right arrows cycle through all player-owned planets.
 - Color-coded highlighting for structures matching the color of the tile they are built on, plus an automation marker. Toggleable with the `C` key.
 - Hover tooltip for structures (Name, tile color, automation status). Holding **Shift** while hovering shows additional details about the resources generated.
 - Clicking an empty tile immediately opens the build list, bypassing the intermediate window with the `Build` button.

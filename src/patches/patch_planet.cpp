@@ -105,6 +105,44 @@ static int AnyBuildable(P_Planet pPlanet, UWORD sq)
     return 0;
 }
 
+static P_Planet NextPlayerPlanet(P_Planet cur, int dir)
+{
+    int n = Game.planetsNum;
+    int i = (int)(cur - Game.planets);
+    int step;
+    if (n <= 0) return cur;
+    for (step = 1; step <= n; ++step)
+    {
+        i += dir;
+        if (i < 0) i += n;
+        if (i >= n) i -= n;
+        if (Game.planets[i].raceIndex == PlayerRaceIndex)
+            return &Game.planets[i];
+    }
+    return cur;  // No other player's planets
+}
+
+static void SwitchPlanet(P_Wnd07PW pWnd, int dir)
+{
+    P_Planet np;
+    P_WndA2 pList, pSq;
+
+    if (WinMgr.gameEventsNum) return;
+
+    pList = WinMgr_FindWnd(&WinMgr, "PLANLIST", 0);
+    pSq = WinMgr_FindWnd(&WinMgr, "PLSQUARE", 0);
+    if ((pList && pList->shown) || (pSq && pSq->shown)) return;
+
+    if (!Game.pCurPlanet || Game.pCurPlanet->raceIndex != PlayerRaceIndex) return;
+
+    np = NextPlayerPlanet(Game.pCurPlanet, dir);
+    if (np == Game.pCurPlanet) return;
+
+    Game.pCurPlanet = np;
+    Game.pCurStar = &Game.stars[np->starIndex];
+    WinMgr_QueueMessage(&WinMgr, ASCEND_SM_SWITCHSTATE, ASCEND_WINMGR_STATE_PLANET_ALLOC, 0);
+}
+
 static int g_shiftCache = 0;
 
 static int Patch_WndPlanet_Proc3(P_Wnd07PW pWnd, UWORD message, int param1, int param2)
@@ -159,9 +197,11 @@ static int Patch_WndPlanet_Proc3(P_Wnd07PW pWnd, UWORD message, int param1, int 
                     break;
                 case KSC_NUMPAD6:
                     gDX++;
+                    SwitchPlanet(pWnd, +1);
                     break;
                 case KSC_NUMPAD4:
                     gDX--;
+                    SwitchPlanet(pWnd, -1);
                     break;
             }
             break;
